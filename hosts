@@ -1,0 +1,10 @@
+[Azure_Servers]
+10.2.0.4
+10.2.0.5
+
+[Azure_Servers:vars]
+ansible_user="azureadmin"
+ansible_password=K&Pbf4ever2167!
+ansible_connection=winrm
+ansible_winrm_transport=credssp
+ansible_winrm_server_cert_validation=ignore
