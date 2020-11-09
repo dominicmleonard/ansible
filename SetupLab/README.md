@@ -37,10 +37,14 @@ create a PowerShell script called openSMB.ps1 on your cloud drive with the follo
 set-netfirewallrule -name 'FPS-SMB-In-TCP' -enabled true
 
 now run that script inside your VM, like this:
+```
 az vm run-command invoke  --command-id RunPowerShellScript --name winserver01 -g devansible --scripts @openSMB.ps1
+```
 
 9. When complete, grab its private IP Address like this:
+```
 dominic@Azure:~$ az vm show -g devansible -n winserver01 -d --query privateIps
+```
 "10.0.0.5"
 
 10. Now ssh back in to ubuntu01
