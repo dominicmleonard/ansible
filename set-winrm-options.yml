@@ -1,0 +1,25 @@
+---
+    - hosts: localhost
+      tasks:
+      - name: Include vars file
+        include_vars:
+          file: vars.yml
+      - name: Download and run ConfigureRemotingForAnsible.ps1 to setup WinRM
+        psexec:
+          hostname: '{{item}}'
+          connection_username: '{{azure_adminuser}}'
+          connection_password: '{{azure_password}}'
+          encrypt: yes
+          executable: powershell.exe
+          arguments: '-'
+          stdin: |
+            $ErrorActionPreference = "Stop"
+            $sec_protocols = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::SystemDefault
+            $sec_protocols = $sec_protocols -bor [Net.SecurityProtocolType]::Tls12
+            [Net.ServicePointManager]::SecurityProtocol = $sec_protocols
+            $url = "https://github.com/ansible/ansible/raw/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+            Invoke-Expression ((New-Object Net.WebClient).DownloadString($url))
+            exit
+        delegate_to: localhost
+        loop: '{{winservers}}'
+    

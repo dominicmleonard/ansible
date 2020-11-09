@@ -1,0 +1,7 @@
+---
+az_resourcegroup: devansible
+az_location: ukwest
+azure_adminuser: azureadmin
+azure_password: K&Pbf4ever2167!
+winservers:
+  - 10.0.0.5
