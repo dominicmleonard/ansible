@@ -9,7 +9,7 @@
 
 3. Make a new local dir for github repo
    
-   mkdir ansiblerepo
+   mkdir devansible
 
 4. Clone my repo locally:
 
