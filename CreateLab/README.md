@@ -6,7 +6,7 @@ Assuming you have cloned the repo to your Azure CloudShell, go to the folder in 
 
 create-lab.yml  README.md  remove-resource-group.yml  vars.yml
 
-Now you can run the Create-Lab.yml playbook to setup an Azure Resource Group with 2 VMs.
+Now you can run the create-lab.yml playbook to setup an Azure Resource Group with 2 VMs.
 
 The Ubuntu VM will use the SSH keys you prepared already.
 
