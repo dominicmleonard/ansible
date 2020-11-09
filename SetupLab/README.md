@@ -1,62 +1,61 @@
-1. Open Azure Cloud Shell (bash)
-2. Create a key pair for ssh with command:
-   
-2. download key.pem file
-3. when VM is provisioned use azure cloud shell to upload 'key.pem' file to cloud drive
-4. create .ssh directory and move 'key.pem' file there:
-$ mkdir .ssh
-$ mv key.pem .ssh
-5. now find your VM's IP Address by running:
-dominic@Azure:~$ az vm show -g ansibledev -n anc01 -d --query publicIps
-"51.137.130.107"
-dominic@Azure:~$ ssh -i .ssh/anc01_key.pem azureuser@51.137.130.107
-The authenticity of host '51.137.130.107 (51.137.130.107)' can't be established.
-ECDSA key fingerprint is SHA256:jSykWmRMtV//zfP/clacFy+bDAvq0kf2YJ0n2e9LuI0.
+Install Ansible on your ubuntu VM:
+
+1. now find your VM's IP Address by running this from the cloudshell (in my example vm name is ubuntu01, resourcegroup is devansible):
+ az vm show -g devansible -n ubuntu01 -d --query publicIps
+"52.138.196.98"
+now ssh to the ip with the 
+dominic@Azure:~$ ssh -i .ssh/id_rsa azureuser@52.138.196.98
+The authenticity of host '52.138.196.98 (52.138.196.98)' can't be established.
+ECDSA key fingerprint is SHA256:uMJiveEvD/EezK91z8EnzZJxWVXGQ51fp6Qc1gMBVdI.
 Are you sure you want to continue connecting (yes/no)? yes
 
-then you will be in the anc01 ubuntu machine:
-azureuser@anc01:~$
+then you will be in the ubuntu01 ubuntu machine:
+azureuser@ubuntu01:~$
 
-6. sudo l
-7. sudo apt update
-8. sudo apt install ansible
-9. sudo apt install python-pip
-10. pip install "pywinrm>=0.2.2"
-11. pip install "pypsexec"
- once complete run 'ansible --version' and you should see:
+2. sudo apt-add-repository ppa:ansible/ansible
+3. sudo apt update
+4. sudo apt install ansible
+5. sudo apt install python-pip
+6. pip install "pywinrm>=0.2.2"
+7. pip install "pypsexec"
+   once complete run 'ansible --version' and you should see that it is installed.
+   now exit out from the ubuntu ssh session.
 
- azureuser@anc01:~$ ansible --version
-/usr/lib/python2.7/dist-packages/ansible/parsing/vault/__init__.py:44: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in a future release.
-  from cryptography.exceptions import InvalidSignature
-ansible 2.9.15
-  config file = /etc/ansible/ansible.cfg
-  configured module search path = [u'/home/azureuser/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
-  ansible python module location = /usr/lib/python2.7/dist-packages/ansible
-  executable location = /usr/bin/ansible
-  python version = 2.7.17 (default, Sep 30 2020, 13:38:04) [GCC 7.5.0]
-
-12. Now create a Windows Server VM in the same resource group as the anc01 server, take note of the username / password you set in creating it.
-13. When deployment of Windows VM is complete we need to open up the SMB Firewall rule, so that later we can use Ansible to configure WinRM for us..
+9. By defult the Windows VM will have a Firewall rule that disables SMB to the server, we need to change the default so that later we can use Ansible to configure WinRM for us..
 We can do this by invoking a PowerShell script inside the VM from the Azure cli.
 in your CloudShell, exit out of the ubuntu server (if you're still ssh'd into it).
 create a PowerShell script called openSMB.ps1 on your cloud drive with the following contents:
-set-netfirewallrule -name 'FPS-SMB-In-TCP' -enabled true
-now run that script inside your VM, like this:
-az vm run-command invoke  --command-id RunPowerShellScript --name winserver01 -g ansibledev --scripts @openSMB.ps1
 
-14. When complete, grab its private IP Address like this:
-dominic@Azure:~$ az vm show -g ansibledev -n winserver01 -d --query privateIps
+set-netfirewallrule -name 'FPS-SMB-In-TCP' -enabled true
+
+now run that script inside your VM, like this:
+az vm run-command invoke  --command-id RunPowerShellScript --name winserver01 -g devansible --scripts @openSMB.ps1
+
+9. When complete, grab its private IP Address like this:
+dominic@Azure:~$ az vm show -g devansible -n winserver01 -d --query privateIps
 "10.0.0.5"
 
-15. Now ssh back in to anc01
-dominic@Azure:~$ ssh -i .ssh/anc01_key.pem azureuser@51.137.130.107
+10. Now ssh back in to ubuntu01
+dominic@Azure:~$ ssh -i .ssh/id_rsa azureuser@52.138.196.98
 
-16. now make an ansibledev directory:
-azureuser@anc01:~$ mkdir ansibledev
-azureuser@anc01:~$ cd ansibledev/
-azureuser@anc01:~/ansibledev$
+12. now make an devansible directory:
+azureuser@ubuntu0:~$ mkdir devansible
+azureuser@ubuntu0:~$ cd devansible/
+azureuser@ubuntu0:~/devansible$
 
-17. copy ansible.cfg / hosts / vars.yml / set-winrm-options.yml from my git hub
+13. now copy these files from my https://github.com/dominicmleonard/ansible/tree/master/SetupLab folder:
+    hosts
+    set-winrm-optionsyml
 
-18. 
     
+14. run:
+    ansible-playbook set-winrm-options.yml
+
+    this will ask for the privateip address of the windows vm and its admin user / password
+
+15. edit 'hosts' to have your windows VM's private IP and admin password
+
+16. you can now run:
+    ansible Windows_Servers -i hosts -m win_ping
+
+    You should see a ping / pong

@@ -1,12 +1,20 @@
 ---
     - hosts: localhost
+      vars_prompt:
+        - name: winserverprvIP
+          prompt: Please enter the private IP address of winserver01
+          private: no
+        - name: azure_adminuser
+          prompt: Please enter the admin user for winserver01
+          default: azureadmin
+          private: no
+        - name: azure_password
+          prompt: Please enter the admin password fro winserver01
       tasks:
-      - name: Include vars file
-        include_vars:
-          file: vars.yml
+      
       - name: Download and run ConfigureRemotingForAnsible.ps1 to setup WinRM
         psexec:
-          hostname: '{{item}}'
+          hostname: '{{winserverprvIP}}'
           connection_username: '{{azure_adminuser}}'
           connection_password: '{{azure_password}}'
           encrypt: yes
@@ -21,5 +29,3 @@
             Invoke-Expression ((New-Object Net.WebClient).DownloadString($url))
             exit
         delegate_to: localhost
-        loop: '{{winservers}}'
-    
