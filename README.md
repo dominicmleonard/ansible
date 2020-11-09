@@ -1,4 +1,6 @@
-1. create Ubuntu VM in new Resource Group (e.g. ansibledev, vm name = anc01 )
+1. Open Azure Cloud Shell (bash)
+2. Create a key pair for ssh with command:
+   
 2. download key.pem file
 3. when VM is provisioned use azure cloud shell to upload 'key.pem' file to cloud drive
 4. create .ssh directory and move 'key.pem' file there:

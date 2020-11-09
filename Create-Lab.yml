@@ -61,9 +61,9 @@
           key_data: <your-key-data>
       network_interfaces: myNIC
       image:
-        offer: CentOS
-        publisher: OpenLogic
-        sku: '7.5'
+        offer: UbuntuServer
+        publisher: Canonical
+        sku: '18.04-LTS'
         version: latest
   - name: Create WindowsVM
     azure_rm_virtualmachine:
