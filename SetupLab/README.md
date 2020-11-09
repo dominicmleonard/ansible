@@ -1,18 +1,18 @@
-# Install Ansible on ubuntu VM and then setup winrm on WIndows VM
+## install ansible on ubuntu VM and then setup winrm on windows VM
 
 1. Find your VM's IP Address by running this from the cloudshell (in my example vm name is ubuntu01, resourcegroup is devansible)
 
- `az vm show -g devansible -n ubuntu01 -d --query publicIps`
+    `az vm show -g devansible -n ubuntu01 -d --query publicIps`
 
-`"52.138.196.98"`
-now ssh to the ip with the 
+    `"52.138.196.98"`
 
-`dominic@Azure:~$ ssh -i .ssh/id_rsa azureuser@52.138.196.98`
+    now ssh to the ip with the 
 
+    `dominic@Azure:~$ ssh -i .ssh/id_rsa azureuser@52.138.196.98`
 
-then you will be in the ubuntu01 ubuntu machine:
+    then you will be in the ubuntu01 ubuntu machine:
 
-`azureuser@ubuntu01:~$`
+    `azureuser@ubuntu01:~$`
 
 2. `sudo apt-add-repository ppa:ansible/ansible`
 3. `sudo apt update`
