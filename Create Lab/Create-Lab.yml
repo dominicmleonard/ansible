@@ -73,7 +73,7 @@
       resource_group: '{{az_resourcegroup}}'
       name: winserver01
       vm_size: Standard_DS1_v2
-      admin_username: '{{azure_adminuser}}'
+      admin_username: '{{az_adminuser}}'
       admin_password: '{{az_admin_pass}}'
       os_type: Windows
       image:

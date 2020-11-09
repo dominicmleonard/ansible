@@ -1,4 +1,5 @@
 ---
     az_resourcegroup: devansible
     az_location: northeurope
+    az_adminuser: azureadmin
     key_data: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"    
