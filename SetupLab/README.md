@@ -48,11 +48,15 @@ dominic@Azure:~$ az vm show -g devansible -n winserver01 -d --query privateIps
 "10.0.0.5"
 
 10. Now ssh back in to ubuntu01
-dominic@Azure:~$ ssh -i .ssh/id_rsa azureuser@52.138.196.98
+```
+ssh -i .ssh/id_rsa azureuser@52.138.196.98
+```
 
 12. now make an devansible directory:
-azureuser@ubuntu0:~$ mkdir devansible
-azureuser@ubuntu0:~$ cd devansible/
+```
+mkdir devansible
+cd devansible/
+```
 azureuser@ubuntu0:~/devansible$
 
 13. now copy these files from my https://github.com/dominicmleonard/ansible/tree/master/SetupLab folder:
