@@ -1,3 +1,13 @@
+Login to Azure CloudShell (bash).
+
+Make a new local dir for github repo
+
+mkdir ansibledev
+
+Clone my repo locally:
+
+git clone https://github.com/dominicmleonard/ansible ansibledev
+
 This repo comes in 2 parts:
 
 1. CreateLab 
