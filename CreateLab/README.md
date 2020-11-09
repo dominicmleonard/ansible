@@ -1,3 +1,7 @@
+Prerequisites:
+* Repo has been cloned
+* SSH keys have been generated ([Use SSH key authentication](https://docs.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops))
+
 Assuming you have cloned the repo to your Azure CloudShell, go to the folder in the CloudShell as in my example:
 
 'dominic@Azure:~/ansibledev$ cd CreateLab/'
