@@ -1,11 +1,16 @@
-- name: Remove Resource Group
-  hosts: localhost
-  connection: local
-  tasks:
-  - name: Include vars file
-    include_vars:
-      file: vars.yml
-  - name: Delete '{{az_resourcegroup}}'
-    azure_rm_resourcegroup:
-      name: '{{az_resourcegroup}}'
-      state: absent
+---
+    - hosts: localhost
+      connection: local
+      vars_prompt:
+        - name: resourcegroup
+          prompt: enter rg to delete
+          default: devansible
+          private: no
+    
+      tasks:
+    
+      - name: Delete '{{resourcegroup}}'
+        azure_rm_resourcegroup:
+          name: '{{resourcegroup}}'
+          force_delete_nonempty: yes
+          state: absent    

@@ -1,15 +1,18 @@
-
-- name: Create Azure VM
+---
+- name: Create Ubuntu and Windows VM
   hosts: localhost
   connection: local
+  vars_prompt:
+    - name: az_admin_pass
+      prompt: please enter admin password for Windows VM
   tasks:
   - name: Include vars file
     include_vars:
-      file: vars.yml  
+      file: vars.yml
   - name: Create '{{az_resourcegroup}}'
     azure_rm_resourcegroup:
       name: '{{az_resourcegroup}}'
-      location: ukwest
+      location: '{{az_location}}'
   - name: Create virtual network
     azure_rm_virtualnetwork:
       resource_group: '{{az_resourcegroup}}'
@@ -29,7 +32,7 @@
     register: output_ip_address
   - name: Dump public IP for VM which will be created
     debug:
-      msg: "The public IP is {{ output_ip_address.state.ip_address }}."
+      msg: "The public IP for ubuntu server is {{ output_ip_address.state.ip_address }}."
   - name: Create Network Security Group that allows SSH
     azure_rm_securitygroup:
       resource_group: '{{az_resourcegroup}}'
@@ -49,7 +52,7 @@
       subnet: mySubnet
       public_ip_name: myPublicIP
       security_group: myNetworkSecurityGroup
-  - name: Create UbuntuServer VM
+  - name: Create Ubuntu VM
     azure_rm_virtualmachine:
       resource_group: '{{az_resourcegroup}}'
       name: ubuntu01
@@ -58,23 +61,23 @@
       ssh_password_enabled: false
       ssh_public_keys:
         - path: /home/azureuser/.ssh/authorized_keys
-          key_data: <your-key-data>
+          key_data: '{{key_data}}'
       network_interfaces: myNIC
       image:
         offer: UbuntuServer
         publisher: Canonical
         sku: '18.04-LTS'
         version: latest
-  - name: Create WindowsVM
+  - name: Create Windows VM
     azure_rm_virtualmachine:
       resource_group: '{{az_resourcegroup}}'
-      name: windows01
+      name: winserver01
       vm_size: Standard_DS1_v2
       admin_username: '{{azure_adminuser}}'
-      admin_password: '{{azure_password}}'
+      admin_password: '{{az_admin_pass}}'
       os_type: Windows
       image:
         offer: WindowsServer
         publisher: MicrosoftWindowsServer
         sku: 2019-Datacenter
-        version: latest`
+        version: latest
