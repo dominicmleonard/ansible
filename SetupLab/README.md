@@ -28,22 +28,23 @@ We can do this by invoking a PowerShell script inside the VM from the Azure cli.
 in your CloudShell, exit out of the ubuntu server (if you're still ssh'd into it).
 create a PowerShell script called openSMB.ps1 on your cloud drive with the following contents:
 
-`set-netfirewallrule -name 'FPS-SMB-In-TCP' -enabled true`
+  `set-netfirewallrule -name 'FPS-SMB-In-TCP' -enabled true`
 
-now run that script inside your VM, like this:
-`az vm run-command invoke  --command-id RunPowerShellScript --name winserver01 -g devansible --scripts @openSMB.ps1`
+  now run that script inside your VM, like this:
+  `az vm run-command invoke  --command-id RunPowerShellScript --name winserver01 -g devansible --scripts @openSMB.ps1`
 
 9. When complete, grab its private IP Address like this:
-`dominic@Azure:~$ az vm show -g devansible -n winserver01 -d --query privateIps`
-`"10.0.0.5"`
+  `dominic@Azure:~$ az vm show -g devansible -n winserver01 -d --query privateIps`
+
+  `"10.0.0.5"`
 
 10. Now ssh back in to ubuntu01
-`dominic@Azure:~$ ssh -i .ssh/id_rsa azureuser@52.138.196.98`
+  `dominic@Azure:~$ ssh -i .ssh/id_rsa azureuser@52.138.196.98`
 
 12. now make an devansible directory:
-`azureuser@ubuntu0:~$ mkdir devansible`
-`azureuser@ubuntu0:~$ cd devansible/`
-`azureuser@ubuntu0:~/devansible$`
+  `azureuser@ubuntu0:~$ mkdir devansible`
+  `azureuser@ubuntu0:~$ cd devansible/`
+  `azureuser@ubuntu0:~/devansible$`
 
 13. now copy these files from my https://github.com/dominicmleonard/ansible/tree/master/SetupLab folder:
     `hosts`
