@@ -20,6 +20,7 @@
 5. `sudo apt install python-pip`
 6. `pip install "pywinrm>=0.2.2"`
 7. `pip install "pypsexec"`
+
    once complete run `ansible --version` and you should see that it is installed.
    now exit out from the ubuntu ssh session.
 
