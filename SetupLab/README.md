@@ -1,15 +1,17 @@
-# Install Ansible on your ubuntu VM:
+# Install Ansible on ubuntu VM and then setup winrm on WIndows VM
 
-1. now find your VM's IP Address by running this from the cloudshell (in my example vm name is ubuntu01, resourcegroup is devansible):
+1. Find your VM's IP Address by running this from the cloudshell (in my example vm name is ubuntu01, resourcegroup is devansible)
+
  `az vm show -g devansible -n ubuntu01 -d --query publicIps`
+
 `"52.138.196.98"`
 now ssh to the ip with the 
+
 `dominic@Azure:~$ ssh -i .ssh/id_rsa azureuser@52.138.196.98`
-`The authenticity of host '52.138.196.98 (52.138.196.98)' can't be established.`
-`ECDSA key fingerprint is SHA256:uMJiveEvD/EezK91z8EnzZJxWVXGQ51fp6Qc1gMBVdI.`
-`Are you sure you want to continue connecting (yes/no)? yes`
+
 
 then you will be in the ubuntu01 ubuntu machine:
+
 `azureuser@ubuntu01:~$`
 
 2. `sudo apt-add-repository ppa:ansible/ansible`
