@@ -1,16 +1,15 @@
-1. Open Azure Cloud Shell (bash)
+Assuming you have cloned the repo to your Azure CloudShell, go to the folder in the CloudShell as in my example:
 
-2. Create a key pair for ssh with command:
-   ssh-keygen -m PEM -t rsa -b 4096
+dominic@Azure:~/ansibledev$ cd CreateLab/
+dominic@Azure:~/ansibledev/CreateLab$ ls
+Create-Lab.yml  README.md  remove-resource-group.yml  vars.yml
 
-   accept the defaults, this will put a pub/privaye key pair in the default location on your clouddrive:
-   $HOME/.ssh/id_rsa
-   $HOME/.ssh/id_rsa.pub
+Now you can run the Create-Lab.yml playbook to setup an Azure Resource Group with 2 VMs.
 
-3. Make a new local dir for github repo
-   
-   mkdir devansible
+The Ubuntu VM will use the SSH keys you prepared already.
 
-4. Clone my repo locally:
+The playbook will prompt for a password for the Windows VM (user is set to 'azureadmin')
 
-   
+To run the playbook type:
+
+dominic@Azure:~/ansibledev/CreateLab$ ansible-playbook Create-Lab.yml
