@@ -1,3 +1,5 @@
+# Prepare Azure Cloud Shell
+
 * Login to Azure CloudShell (bash).
 
 * Make a new local dir for github repo
