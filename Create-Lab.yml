@@ -49,10 +49,10 @@
       subnet: mySubnet
       public_ip_name: myPublicIP
       security_group: myNetworkSecurityGroup
-  - name: Create CentOS VM
+  - name: Create UbuntuServer VM
     azure_rm_virtualmachine:
       resource_group: '{{az_resourcegroup}}'
-      name: centos01
+      name: ubuntu01
       vm_size: Standard_DS1_v2
       admin_username: azureuser
       ssh_password_enabled: false
