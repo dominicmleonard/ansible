@@ -91,3 +91,7 @@
       dest: inventory
       content:
         ubuntu01 ansible_host='{{ output_ip_address.state.ip_address }}' ansible_port=22 ansible_user=azureuser
+
+  - name: Next Step...
+    debug:
+      msg: "Now you can run ansible-playbook install-ansible.yml to install ansible on the ubuntu01 server"
