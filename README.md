@@ -2,6 +2,12 @@
 
 * Login to Azure CloudShell (bash).
 
+* Prepare SSH Key pair
+
+    `ssh-keygen -m PEM -t rsa -b 4096`
+
+    accept the defaults
+
 * Make a new local dir for github repo
 
     `mkdir ansibledev`
