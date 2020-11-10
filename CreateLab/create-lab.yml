@@ -92,7 +92,7 @@
       content:
         ubuntu01 ansible_host='{{ output_ip_address.state.ip_address }}' ansible_port=22 ansible_user=azureuser
 
-  - name: Create inventory file with ubuntu VM's public ip address
+  - name: Create ansible.cfg file to point at inventory file created in last step
     copy:
       dest: ansible.cfg
       content: |
