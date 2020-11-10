@@ -1,1 +1,0 @@
-set-netfirewallrule -name 'FPS-SMB-In-TCP' -enabled true
