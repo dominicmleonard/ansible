@@ -1,9 +1,0 @@
----
-- name: Open SMB on Firewall of Windows VM
-  hosts: localhost
-  connection: local
-  
-  tasks:
-    - name: Run PowerShell Script to Open SMB
-      shell:
-        az vm run-command invoke --command-id RunPowerShellScript --name winserver01 -g devansible --scripts @files/openSMB.ps1

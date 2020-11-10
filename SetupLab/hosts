@@ -1,9 +1,0 @@
-[Windows_Servers]
-10.0.0.5
-# replace with private ip address of your windows vm
-
-[Windows_Servers:vars]
-ansible_user="azureadmin"
-ansible_password=<enter the admin password for the vm here>
-ansible_connection=winrm
-ansible_winrm_server_cert_validation=ignore
