@@ -1,0 +1,1 @@
+ubuntu01 ansible_host=<add ubuntu vm's publicIP> ansible_port=22 ansible_user=azureuser
