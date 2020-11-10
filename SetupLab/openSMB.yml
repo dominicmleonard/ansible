@@ -1,0 +1,6 @@
+---
+- name: Open SMB on Firewall of Windows VM
+  hosts: localhost
+  connection: local
+  
+  tasks:
