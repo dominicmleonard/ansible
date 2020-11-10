@@ -1,4 +1,4 @@
-# Prepare Azure Cloud Shell
+# Get up and Running
 
 * Login to Azure CloudShell (bash).
 
@@ -8,23 +8,18 @@
 
     accept the defaults
 
-* Make a new local dir for github repo
-
-    `mkdir ansibledev`
-
 * Clone my repo locally:
 
-    `git clone https://github.com/dominicmleonard/ansible ansibledev`
+    `git clone https://github.com/dominicmleonard/ansible`
 
-* This repo comes in 2 parts:
+* When the repo is cloned go to the CreateLab folder and run:
 
-    1. CreateLab
+    `ansible-playbook create-lab.yml`
 
-        Instructions and necessary playbooks to create small lab in Azure ready to play with Ansible.
-        Uses Azure CloudShell Ansible to create 2 VMs.
+* When that playbook has completed run:
 
-    2. SetupLab
+    `ansible-playbook install-ansible.yml`
 
-        Instructions, playbooks and files to help you setup an Ansible control host on Ubuntu and a Windows Server ready to be managed.
+The first playbook creates 2 VMs (one Ubuntu and one Windows) in a resource group called 'devansible' in your Azure subscription.  It sets up the Windows VM's WinRM configuration so that Ansible can manage it.  It also dynamically creates 'inventory' and 'ansible.cfg' files that are used by the second playbook to install Ansible on to Ubuntu VM.
 
-## Follow the README instructions in each part
+The second playbook uses the dynamically created files to install Ansible on the Ubuntu VM.
