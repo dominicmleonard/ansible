@@ -81,3 +81,7 @@
         publisher: MicrosoftWindowsServer
         sku: 2019-Datacenter
         version: latest
+        
+  - name: Run PowerShell Script to Set WinRM for Ansible on Windows VM
+    shell:
+      az vm run-command invoke --command-id RunPowerShellScript --name winserver01 -g '{{az_resourcegroup}}' --scripts @files/set-ansiblewinrm.ps1
