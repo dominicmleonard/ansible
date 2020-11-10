@@ -4,10 +4,7 @@
   connection: local
   
   tasks:
-    - name: Run PowerShell Script to Open SMB
-      shell:
-        az vm run-command invoke --command-id RunPowerShellScript --name winserver01 -g devansible --scripts @files/openSMB.ps1
-
+    
     - name: Run PowerShell Script to Set WinRM for Ansible
       shell:
         az vm run-command invoke --command-id RunPowerShellScript --name winserver01 -g devansible --scripts @files/set-ansiblewinrm.ps1
