@@ -85,3 +85,9 @@
   - name: Run PowerShell Script to Set WinRM for Ansible on Windows VM
     shell:
       az vm run-command invoke --command-id RunPowerShellScript --name winserver01 -g '{{az_resourcegroup}}' --scripts @files/set-ansiblewinrm.ps1
+
+  - name: Create inventory file with ubuntu VM's public ip address
+    copy:
+      dest: inventory
+      content:
+        ubuntu01 ansible_host='{{ output_ip_address.state.ip_address }}' ansible_port=22 ansible_user=azureuser
