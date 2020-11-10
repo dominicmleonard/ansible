@@ -1,26 +1,24 @@
 ---
     - name: Install Ansible on Ubuntu VM in Azure
       hosts: ubuntu01
-      
+      become: yes
+
       tasks:
         - name: Add ansible repository into sources list
           apt_repository:
             repo: ppa:ansible/ansible
             state: present
-          
+
         - name: Update all packages to their latest version
           apt:
             name: "*"
             state: latest
 
-        - name: apt install ansible
+        - name: apt install ansible and python-pip
           apt:
-            name: ansible
-            state: present
-            
-        - name: apt install python-pip
-          apt:
-            name: python-pip
+            name:
+              - ansible
+              - python-pip
             state: present
 
         - name: install pip components
