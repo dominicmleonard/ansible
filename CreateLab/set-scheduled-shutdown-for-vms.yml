@@ -1,0 +1,15 @@
+---
+    - name: Set Scheduled Shutdown for VMs in Azure ResourceGroup
+      hosts: localhost
+      connection: local
+      vars_prompt:
+        - name: az_resourcegroup
+          prompt: please enter name of the resource group
+          default: devansible
+        - name: shutdowntime
+          prompt: enter time to shutdown VMs
+          default: 1730
+      tasks:
+      - name: Set shutdown schedule at {{shutdowntime}} for all VMs in {{az_resourcegroup}}
+        shell:
+            for i in $(az vm list -g '{{az_resourcegroup}}' --query "[].name" -o tsv); do az vm auto-shutdown -g '{{az_resourcegroup}}' -n $i --time '{{shutdowntime}}' ; done
