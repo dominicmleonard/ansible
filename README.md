@@ -24,6 +24,12 @@ The first playbook creates 2 VMs (one Ubuntu and one Windows) in a resource grou
 
 The second playbook uses the dynamically created files to install Ansible on the Ubuntu VM.
 
+* You can set the VMs in the Resource Group to automatically shutdown (and thereby save money) by running this playbook in the CreateLab folder:
+
+    `ansible-playbook set-scheduled-shutdown-for-vms.yml`
+
+    If you accept the defaults it will setthe VMs in 'devansible' to shutdown at 17:30.  You could use this playbook to set shutdown schedules for VMs in any other Azure Resource Group.
+
 * You can remove the resource group (and all resources created) by running this playbook in the CreateLab folder:
 
     `ansible-playbook remove-resource-group.yml`
