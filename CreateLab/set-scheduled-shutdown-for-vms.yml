@@ -6,9 +6,11 @@
         - name: az_resourcegroup
           prompt: please enter name of the resource group
           default: devansible
+          private: no
         - name: shutdowntime
           prompt: enter time to shutdown VMs
           default: 1730
+          private: no
       tasks:
       - name: Set shutdown schedule at {{shutdowntime}} for all VMs in {{az_resourcegroup}}
         shell:
