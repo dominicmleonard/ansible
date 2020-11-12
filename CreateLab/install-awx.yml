@@ -1,0 +1,41 @@
+---
+- name: Install AWX Tower on Ubuntu VM in Azure
+  hosts: ubuntu01
+  become: yes
+
+  tasks:
+    - name: sudo apt install docker.io, docker, nodejs, npm, git, pwgen, vim, python3-pip
+      apt:
+        name:
+          - docker.io
+          - nodejs
+          - npm
+          - git
+          - pwgen
+          - vim
+          - python3-pip
+        state: present
+
+    - name: install pip components
+      pip:
+         name:
+           - docker
+           - pypsexec
+
+    - name: add user to group
+      become: true
+      user:
+       name: "{{ansible_user}}"
+       groups: docker
+       append: true
+
+    - name: install pip3 components
+      pip:
+         name:
+           - docker-compose==1.25.5
+         executable: pip3
+
+    - name: Get AWX git repo
+      git:
+        repo: https://github.com/ansible/awx.git
+        dest: /awx
