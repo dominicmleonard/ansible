@@ -39,3 +39,11 @@
       git:
         repo: https://github.com/ansible/awx.git
         dest: /awx
+
+    - name: Run AWX Install
+      shell:
+        /awx/installer/ansible-playbook -i inventory install.yml
+    
+    - name: Set Docker to run at boot
+      shell:
+        systemctl enable docker
