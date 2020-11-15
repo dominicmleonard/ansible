@@ -1,0 +1,5 @@
+---
+- include: create-az-rg.yml
+- include: create-az-vnet.yml
+- include: create-az-nsg.yml
+- include: create-az-ubuntu-vm.yml
