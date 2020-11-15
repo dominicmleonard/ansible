@@ -1,0 +1,13 @@
+---
+- name: Create Ubuntu and Windows VM
+  hosts: localhost
+  connection: local
+  
+  tasks:
+  - name: Include vars file
+    include_vars:
+      file: vars.yml
+  - name: Create '{{az_resourcegroup}}'
+    azure_rm_resourcegroup:
+      name: '{{az_resourcegroup}}'
+      location: '{{az_location}}'

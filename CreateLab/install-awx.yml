@@ -42,6 +42,7 @@
 
     - name: Run AWX Install
       shell:
+      user: azureuser
         /awx/installer/ansible-playbook -i inventory install.yml
     
     - name: Set Docker to run at boot

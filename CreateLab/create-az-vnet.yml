@@ -1,0 +1,21 @@
+---
+- name: Create Ubuntu and Windows VM
+  hosts: localhost
+  connection: local
+
+  tasks:
+  - name: Include vars file
+    include_vars:
+      file: vars.yml
+
+  - name: Create virtual network
+    azure_rm_virtualnetwork:
+      resource_group: '{{az_resourcegroup}}'
+      name: '{{az_vnet}}'
+      address_prefixes: "10.0.0.0/16"
+  - name: Add subnet
+    azure_rm_subnet:
+      resource_group: '{{az_resourcegroup}}'
+      name: '{{az_subnet}}'
+      address_prefix: "10.0.1.0/24"
+      virtual_network: '{{az_vnet}}'
