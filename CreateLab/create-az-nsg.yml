@@ -1,5 +1,5 @@
 ---
-- name: Create Ubuntu and Windows VM
+- name: Create Az NSG
   hosts: localhost
   connection: local
 

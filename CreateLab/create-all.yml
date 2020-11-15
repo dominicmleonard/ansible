@@ -1,5 +1,5 @@
 ---
-- include: create-az-rg.yml
-- include: create-az-vnet.yml
-- include: create-az-nsg.yml
-- include: create-az-ubuntu-vm.yml
+- import_playbook: create-az-rg.yml
+- import_playbook: create-az-vnet.yml
+- import_playbook: create-az-nsg.yml
+- import_playbook: create-az-ubuntu-vm.yml
