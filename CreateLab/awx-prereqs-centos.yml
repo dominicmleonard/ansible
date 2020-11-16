@@ -1,6 +1,6 @@
 ---
 - name: Prepare CentOS 7.5 machine for AWX Install
-  hosts: centos7
+  hosts: centos01
   become: yes
   
   tasks:
@@ -30,11 +30,8 @@
       state: latest
 
   - name: add repo https://download.docker.com/linux/centos/docker-ce.repo
-    yum_repository:
-      name: epel
-      description: docker-ce repo
-      file: /etc/yum.repos.d/docker-ce.repo
-      baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+    shell:
+      wget https://download.docker.com/linux/centos/docker-ce.repo --directory-prefix /etc/yum.repos.d/
   
   - name: install git gcc gcc-c++ ansible nodejs gettext device-mapper-persistent-data lvm2 bzip2 python3-pip python-docker wget nano python3-devel docker-ce
     yum:
@@ -67,6 +64,7 @@
     pip:
          name:
            - docker-compose
+           - selinux
          executable: pip3
 
   - name: sudo usermod -aG docker $USER
