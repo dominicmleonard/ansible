@@ -1,0 +1,81 @@
+---
+- name: Prepare CentOS 7.5 machine for AWX Install
+  hosts: centos7
+  become: yes
+  
+  tasks:
+  
+  - name: stop and disable firewalld
+    service:
+      name: firewalld
+      state: stopped
+      enabled: no
+      
+  - name: edit /etc/sysconfig/selinux
+    copy:
+      dest: /etc/sysconfig/selinux
+      content:
+        SELINUX=disabled
+
+  - name: reboot
+    reboot:
+
+  - name: install epel-release
+    yum:
+      name: epel-release
+
+  - name: yum update
+    yum:
+      name: '*'
+      state: latest
+
+  - name: add repo https://download.docker.com/linux/centos/docker-ce.repo
+    yum_repository:
+      name: epel
+      description: docker-ce repo
+      file: /etc/yum.repos.d/docker-ce.repo
+      baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+  
+  - name: install git gcc gcc-c++ ansible nodejs gettext device-mapper-persistent-data lvm2 bzip2 python3-pip python-docker wget nano python3-devel docker-ce
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+        - git
+        - gcc 
+        - gcc-c++ 
+        - ansible
+        - nodejs
+        - gettext
+        - device-mapper-persistent-data
+        - lvm2
+        - bzip2
+        - python3-pip
+        - python-docker
+        - wget 
+        - nano 
+        - python3-devel
+        - docker-ce
+
+  - name: start and enable docker service
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: pip3 install docker-compose
+    pip:
+         name:
+           - docker-compose
+         executable: pip3
+
+  - name: sudo usermod -aG docker $USER
+    user:
+       name: "{{ansible_user}}"
+       groups: docker
+       append: true
+
+  - name: git clone https://github.com/ansible/awx.git
+    git:
+      repo: https://github.com/ansible/awx.git
+      dest: /awx
