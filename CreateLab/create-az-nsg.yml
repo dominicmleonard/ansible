@@ -5,7 +5,7 @@
 
   tasks:
   
-  - name: Create Network Security Group that allows SSH
+  - name: Create Network Security Group that allows SSH and HTTP
     azure_rm_securitygroup:
       resource_group: '{{az_resourcegroup}}'
       name: '{{az_nsg}}'
@@ -15,4 +15,10 @@
           destination_port_range: 22
           access: Allow
           priority: 1001
+          direction: Inbound
+        - name: http
+          protocol: Tcp
+          destination_port_range: 80
+          access: Allow
+          priority: 1002
           direction: Inbound
