@@ -1,12 +1,7 @@
 ---
 - hosts: localhost
-
-  tasks:
-  - name: Include vars file
-    include_vars:
-      file: vars.yml
       
 - import_playbook: create-az-rg.yml
 - import_playbook: create-az-vnet.yml
 - import_playbook: create-az-nsg.yml
-- import_playbook: create-az-ubuntu-vm.yml
+- import_playbook: create-az-centos-vm.yml

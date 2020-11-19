@@ -4,15 +4,12 @@
   connection: local
 
   tasks:
-  - name: Include vars file
-    include_vars:
-      file: vars.yml
-
+  
   - name: Create CentOS VM
     azure_rm_virtualmachine:
       resource_group: '{{az_resourcegroup}}'
       name: centos01
-      vm_size: Standard_DS1_v2
+      vm_size: Standard_B2s
       admin_username: azureuser
       ssh_password_enabled: false
       ssh_public_keys:
