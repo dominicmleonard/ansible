@@ -5,5 +5,5 @@
     az_nsg: devansible-nsg
     az_location: northeurope
     az_adminuser: azureadmin
-    az_win_password: S3cret2001!
+    az_win_password: S3cret2001!  
     key_data: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"    

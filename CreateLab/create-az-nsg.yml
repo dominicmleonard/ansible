@@ -5,7 +5,7 @@
 
   tasks:
   
-  - name: Create Network Security Group that allows SSH
+  - name: Create Network Security Group that allows SSH and HTTP
     azure_rm_securitygroup:
       resource_group: '{{az_resourcegroup}}'
       name: '{{az_nsg}}'
