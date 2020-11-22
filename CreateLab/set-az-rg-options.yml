@@ -1,0 +1,19 @@
+---
+- name: Create CentOS VM
+  hosts: localhost
+  connection: local
+
+  tasks:
+
+  - name: Set shutdown schedule at {{shutdowntime}} for all VMs in {{az_resourcegroup}}
+    shell:
+      for i in $(az vm list -g '{{az_resourcegroup}}' --query "[].name" -o tsv) ;
+      do az vm auto-shutdown -g '{{az_resourcegroup}}' -n $i --time '{{shutdowntime}}' ;
+      done
+
+  - name: Shutdown VMs in {{az_resourcegroup}}
+    shell:
+      az vm deallocate --ids $(az vm list -g '{{az_resourcegroup}}' --query "[].id" -o tsv)
+
+
+      

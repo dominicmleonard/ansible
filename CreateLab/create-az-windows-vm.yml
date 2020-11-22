@@ -1,0 +1,26 @@
+---
+- name: Create CentOS VM
+  hosts: localhost
+  connection: local
+
+  tasks:
+
+- name: Create Windows VM
+  azure_rm_virtualmachine:
+    resource_group: '{{az_resourcegroup}}'
+    name: '{{az_winserver}}'
+    vm_size: Standard_B2s
+    admin_username: '{{az_adminuser}}'
+    admin_password: '{{az_win_password}}'
+    open_ports:
+      - 3389
+    os_type: Windows
+    image:
+      offer: WindowsServer
+      publisher: MicrosoftWindowsServer
+      sku: 2019-Datacenter
+      version: latest
+
+- name: Run PowerShell Script to Set WinRM for Ansible on Windows VM
+  shell:
+      az vm run-command invoke --command-id RunPowerShellScript --name winserver01 -g '{{az_resourcegroup}}' --scripts @files/set-ansiblewinrm.ps1

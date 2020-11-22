@@ -8,9 +8,12 @@
   - name: Create CentOS VM
     azure_rm_virtualmachine:
       resource_group: '{{az_resourcegroup}}'
-      name: centos01
+      name: '{{az_centos}}'
       vm_size: Standard_B2s
       admin_username: azureuser
+      open_ports:
+        - 22
+        - 80
       ssh_password_enabled: false
       ssh_public_keys:
         - path: /home/azureuser/.ssh/authorized_keys

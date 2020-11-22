@@ -4,6 +4,9 @@
     az_subnet: subnet01
     az_nsg: devansible-nsg
     az_location: northeurope
+    az_winserver: winserver01
+    az_centos: centos01
     az_adminuser: azureadmin
     az_win_password: S3cret2001!
-    key_data: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"    
+    key_data: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+    shutdowntime: 1730 
