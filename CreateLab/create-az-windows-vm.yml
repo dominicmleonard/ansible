@@ -9,7 +9,7 @@
   azure_rm_virtualmachine:
     resource_group: '{{az_resourcegroup}}'
     name: '{{az_winserver}}'
-    vm_size: Standard_B2s
+    vm_size: '{{az_vmsize}}'
     admin_username: '{{az_adminuser}}'
     admin_password: '{{az_win_password}}'
     open_ports:

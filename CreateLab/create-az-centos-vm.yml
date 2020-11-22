@@ -9,7 +9,7 @@
     azure_rm_virtualmachine:
       resource_group: '{{az_resourcegroup}}'
       name: '{{az_centos}}'
-      vm_size: Standard_B2s
+      vm_size: '{{az_vmsize}}'
       admin_username: azureuser
       open_ports:
         - 22

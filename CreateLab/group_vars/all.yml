@@ -1,5 +1,6 @@
 ---
     az_resourcegroup: devansible
+    az_vmsize: Standard_B2s
     az_vnet: devansible-vnet
     az_subnet: subnet01
     az_nsg: devansible-nsg
