@@ -23,8 +23,3 @@
         publisher: OpenLogic
         sku: '7.5'
         version: latest
-  
-  - name: install PWSH
-    yum:
-      name: https://github.com/PowerShell/PowerShell/releases/download/v7.1.0/powershell-7.1.0-1.rhel.7.x86_64.rpm
-      state: present

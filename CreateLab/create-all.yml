@@ -5,4 +5,5 @@
 - import_playbook: create-az-vnet.yml
 - import_playbook: create-az-nsg.yml
 - import_playbook: create-az-centos-vm.yml
+- import_playbook: create-az-windows-vm.yml
 - import_playbook: set-az-rg-options.yml
