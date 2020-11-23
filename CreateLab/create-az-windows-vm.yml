@@ -1,5 +1,5 @@
 ---
-- name: Create CentOS VM
+- name: Create Windows VM
   hosts: localhost
   connection: local
 
