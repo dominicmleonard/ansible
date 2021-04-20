@@ -2,9 +2,7 @@
 - name: Create Ubuntu and Windows VM
   hosts: localhost
   connection: local
-  vars_prompt:
-    - name: az_admin_pass
-      prompt: please enter admin password for Windows VM
+  
   tasks:
   - name: Include vars file
     include_vars:
