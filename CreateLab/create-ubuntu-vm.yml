@@ -68,23 +68,6 @@
         publisher: Canonical
         sku: '18.04-LTS'
         version: latest
-  - name: Create Windows VM
-    azure_rm_virtualmachine:
-      resource_group: '{{az_resourcegroup}}'
-      name: winserver01
-      vm_size: Standard_DS1_v2
-      admin_username: '{{az_adminuser}}'
-      admin_password: '{{az_admin_pass}}'
-      os_type: Windows
-      image:
-        offer: WindowsServer
-        publisher: MicrosoftWindowsServer
-        sku: 2019-Datacenter
-        version: latest
-        
-  - name: Run PowerShell Script to Set WinRM for Ansible on Windows VM
-    shell:
-      az vm run-command invoke --command-id RunPowerShellScript --name winserver01 -g '{{az_resourcegroup}}' --scripts @files/set-ansiblewinrm.ps1
 
   - name: Create inventory file with ubuntu VM's public ip address
     copy:
